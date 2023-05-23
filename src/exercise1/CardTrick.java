@@ -53,7 +53,7 @@ public class CardTrick {
         }
         
         if (foundMatch) {
-            printInfo();
+            printInfo(); //added printinfo
         }
     }
     /**
