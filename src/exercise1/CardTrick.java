@@ -1,5 +1,6 @@
 package exercise1;
-
+import java.util.Random;
+import java.util.Scanner;
 /**
  * A class that fills a hand of 7 cards with random Card Objects and then asks the user to pick a card.
  * It then searches the array of cards for the match to the user's card. 
@@ -7,6 +8,7 @@ package exercise1;
  *
  * @author dancye
  * @author Paul Bonenfant Jan 25, 2022 
+ * @author Vaibhav Sanghani May 23, 2023
  */
 public class CardTrick {
     
@@ -17,9 +19,13 @@ public class CardTrick {
         for (int i = 0; i < hand.length; i++) {
             Card card = new Card();
             //card.setValue(insert call to random number generator here)
-            // 
-            //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+            Random random = new Random();
+            card.setValue(random.nextInt(13) + 1); 
+            
+            
             // Hint: You can use Random -> random.nextInt(n) to get a random number between 0 and n-1 (inclusive)
+            card.setSuit(Card.SUITS[random.nextInt(4)]);
+            hand[i] = card;
             //       Don't worry about duplicates at this point
         }
 
@@ -32,32 +38,47 @@ public class CardTrick {
         // Then loop through the cards in the array to see if there's a match.
         
         // If the guess is successful, invoke the printInfo() method below.
-        
-    }
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the value of your card: ");
+        int value = scanner.nextInt();
+        System.out.print("Enter the suit of your card (0-Hearts, 1-Diamonds, 2-Clubs, 3-Spades): ");
+        int suit = scanner.nextInt();
 
+        boolean foundMatch = false;
+        for (Card card : hand) {
+            if (card.getValue() == value && card.getSuit().equalsIgnoreCase(Card.SUITS[suit])) {
+                foundMatch = true;
+                break;
+            }
+        }
+        
+        if (foundMatch) {
+            printInfo();
+        }
+    }
     /**
      * A simple method to print out personal information. Follow the instructions to 
      * replace this information with your own.
      * @author Paul Bonenfant Jan 2022
      */
-    private static void printInfo() {
+    private static void printInfo(){
     
         System.out.println("Congratulations, you guessed right!");
         System.out.println();
         
-        System.out.println("My name is Paul, but you can call me prof, Paul or sir");
+        System.out.println("My name is Vaibhav, but you can call me by name.");
         System.out.println();
         
         System.out.println("My career ambitions:");
-        System.out.println("-- Be more active on LinkedIn");
-        System.out.println("-- Have a semester with no violations of academic integrity!");
+        System.out.println("-- To Be successful in cyber security field.");
+        System.out.println("-- buy toyota Supra");
 	System.out.println();	
 
         System.out.println("My hobbies:");
-        System.out.println("-- Investing");
+        System.out.println("-- Gaming");
         System.out.println("-- Cooking");
-        System.out.println("-- Reading/Watching TV");
-        System.out.println("-- Riding my motorcycle");
+        System.out.println("-- Watching TV");
+        System.out.println("-- travelling");
 
         System.out.println();
         
@@ -65,3 +86,6 @@ public class CardTrick {
     }
 
 }
+
+
+    
